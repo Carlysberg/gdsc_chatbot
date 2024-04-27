@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_chatbot/message.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -10,13 +12,36 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _userInputs = TextEditingController();
-  final apiKey = "AIzaSyB2YHQuJDPopAjXFaHhYc1GAhKq9NDEdfI";
+  static const apiKey = "AIzaSyB2YHQuJDPopAjXFaHhYc1GAhKq9NDEdfI";
+  final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
+
+  List<Message> _message = [];
+
   Future<void> callGemini() async {
-    final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
-    final prompt = "hello";
-    final content = Content.text(prompt);
+    final message = _userInputs.text;
+    setState(() {
+      _message.add(
+        Message(
+          isUser: true,
+          message: message,
+          date: DateTime.now(),
+        ),
+      );
+    });
+
+    final content = Content.text(message);
     final response = await model.generateContent([content]);
     print(response.text);
+
+    setState(() {
+      _message.add(
+        Message(
+          isUser: false,
+          message: response.text ?? "",
+          date: DateTime.now(),
+        ),
+      );
+    });
   }
 
   @override
@@ -33,6 +58,17 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Expanded(
+                child: ListView.builder(
+                    itemCount: _message.length,
+                    itemBuilder: (context, index) {
+                      final message = _message[index];
+                      return Messages(
+                          isUser: message.isUser,
+                          message: message.message,
+                          date: DateFormat("HH:mm").format(message.date));
+                    }),
+              ),
               Row(
                 children: [
                   Expanded(
