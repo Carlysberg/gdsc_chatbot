@@ -12,7 +12,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _userInputs = TextEditingController();
-  static const apiKey = "AIzaSyB2YHQuJDPopAjXFaHhYc1GAhKq9NDEdfI";
+  static const apiKey = "AIzaSyBe4Jl6oJewne82U7c_cBNfEJa3Ng1_bak";
   final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
 
   List<Message> _message = [];
@@ -50,10 +50,10 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("images/logo.bmp"),
-              fit: BoxFit.cover,
-            ),
+            // image: DecorationImage(
+            //   image: AssetImage("images/logo.bmp"),
+            //   fit: BoxFit.cover,
+            // ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -87,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const Spacer(),
                   IconButton(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(10),
                     style: ButtonStyle(
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white),
