@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -9,6 +10,14 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _userInputs = TextEditingController();
+  final apiKey = "AIzaSyB2YHQuJDPopAjXFaHhYc1GAhKq9NDEdfI";
+  Future<void> callGemini() async {
+    final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
+    final prompt = "hello";
+    final content = Content.text(prompt);
+    final response = await model.generateContent([content]);
+    print(response.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +60,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         shape: MaterialStateProperty.all(
                           const CircleBorder(),
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      callGemini();
+                    },
                     icon: const Icon(Icons.send, size: 30),
                   )
                 ],
