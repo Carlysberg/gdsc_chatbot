@@ -50,10 +50,10 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage("images/logo.bmp"),
-            //   fit: BoxFit.cover,
-            // ),
+            image: DecorationImage(
+              image: AssetImage("images/logo.bmp"),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -78,10 +78,14 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: TextFormField(
                         controller: _userInputs,
                         decoration: InputDecoration(
-                            label: const Text("Type in here"),
+                            label: const Text("Type in here", style: TextStyle(color: Colors.white),),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                            )),
+                            ),
+                            // enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white),
+                            // ),
+                            ),
+                            style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
