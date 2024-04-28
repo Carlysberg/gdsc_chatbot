@@ -12,7 +12,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _userInputs = TextEditingController();
-  static const apiKey = "AIzaSyB2YHQuJDPopAjXFaHhYc1GAhKq9NDEdfI";
+  static const apiKey = "YOUR_GOOGLE_API_KEY";
   final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
 
   List<Message> _message = [];
@@ -78,16 +78,20 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: TextFormField(
                         controller: _userInputs,
                         decoration: InputDecoration(
-                            label: const Text("Type in here"),
+                            label: const Text("Type in here", style: TextStyle(color: Colors.white),),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                            )),
+                            ),
+                            // enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white),
+                            // ),
+                            ),
+                            style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                   const Spacer(),
                   IconButton(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(10),
                     style: ButtonStyle(
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white),
